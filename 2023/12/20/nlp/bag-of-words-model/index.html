@@ -16,23 +16,21 @@
   <meta name="author" content="imeursault">
   <meta name="keywords" content="">
   
-    <meta name="description" content="文章信息题目Reducing the Dimensionality of Data with Neural Networks 作者Geoffrey E. Hinton and Ruslan R. Salakhutdinov 单位University of Toronto 期刊Science 背景、目的及结论背景目的结论结果与讨论文章好在哪里自我想法1 个思路2 个图表 5 个句式">
+    <meta name="description" content="Bag-of-words model假设文本或文件是一个无序的词语集合，词袋模型就像把所有的词语放入一个袋子中，这个袋子包含了关于文档的所有信息。它忽略了词语的顺序但保留了重复性。词袋模型是自然语言处理和信息检索中的基本模型。 Example以下有两个文本： 1(1) John likes to watch movies. Mary likes movies too.  1(2) Mary als">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Reducing the Dimensionality of Data with Neural Networks">
-<meta property="og:url" content="http://example.com/2024/01/22/Reducing-the-Dimensionality-of-Data-with-Neural-Networks/index.html">
+<meta property="og:title" content="【自然语言处理】词袋模型">
+<meta property="og:url" content="http://example.com/2023/12/20/nlp/bag-of-words-model/index.html">
 <meta property="og:site_name" content="iMeursault&#39;s Blog">
-<meta property="og:description" content="文章信息题目Reducing the Dimensionality of Data with Neural Networks 作者Geoffrey E. Hinton and Ruslan R. Salakhutdinov 单位University of Toronto 期刊Science 背景、目的及结论背景目的结论结果与讨论文章好在哪里自我想法1 个思路2 个图表 5 个句式">
+<meta property="og:description" content="Bag-of-words model假设文本或文件是一个无序的词语集合，词袋模型就像把所有的词语放入一个袋子中，这个袋子包含了关于文档的所有信息。它忽略了词语的顺序但保留了重复性。词袋模型是自然语言处理和信息检索中的基本模型。 Example以下有两个文本： 1(1) John likes to watch movies. Mary likes movies too.  1(2) Mary als">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/Reducing-the-Dimensionality-of-Data-with-Neural-Networks-Figure-1.png">
-<meta property="article:published_time" content="2024-01-22T06:41:35.000Z">
-<meta property="article:modified_time" content="2024-01-22T11:58:06.139Z">
+<meta property="article:published_time" content="2023-12-20T08:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-22T15:35:16.256Z">
 <meta property="article:author" content="imeursault">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/Reducing-the-Dimensionality-of-Data-with-Neural-Networks-Figure-1.png">
   
   
   
-  <title>Reducing the Dimensionality of Data with Neural Networks - iMeursault&#39;s Blog</title>
+  <title>【自然语言处理】词袋模型 - iMeursault&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Reducing the Dimensionality of Data with Neural Networks"></span>
+            <span id="subtitle" data-typed-text="【自然语言处理】词袋模型"></span>
           
         </div>
 
@@ -209,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-22 14:41" pubdate>
-          2024年1月22日 下午
+        <time datetime="2023-12-20 16:00" pubdate>
+          2023年12月20日 下午
         </time>
       </span>
     
@@ -221,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          53 字
+          379 字
         
       </span>
     
@@ -232,7 +230,7 @@
         
         
         
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -269,17 +267,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Reducing the Dimensionality of Data with Neural Networks</h1>
+            <h1 id="seo-header">【自然语言处理】词袋模型</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="文章信息"><a href="#文章信息" class="headerlink" title="文章信息"></a>文章信息</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p><a target="_blank" rel="noopener" href="https://dbirman.github.io/learn/hierarchy/pdfs/Hinton2006.pdf">Reducing the Dimensionality of Data with Neural Networks</a></p>
-<h3 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h3><p>Geoffrey E. Hinton and Ruslan R. Salakhutdinov</p>
-<h3 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h3><p>University of Toronto</p>
-<h3 id="期刊"><a href="#期刊" class="headerlink" title="期刊"></a>期刊</h3><p>Science</p>
-<h2 id="背景、目的及结论"><a href="#背景、目的及结论" class="headerlink" title="背景、目的及结论"></a>背景、目的及结论</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><h2 id="结果与讨论"><a href="#结果与讨论" class="headerlink" title="结果与讨论"></a>结果与讨论</h2><h2 id="文章好在哪里"><a href="#文章好在哪里" class="headerlink" title="文章好在哪里"></a>文章好在哪里</h2><h2 id="自我想法"><a href="#自我想法" class="headerlink" title="自我想法"></a>自我想法</h2><h3 id="1-个思路"><a href="#1-个思路" class="headerlink" title="1 个思路"></a>1 个思路</h3><h3 id="2-个图表"><a href="#2-个图表" class="headerlink" title="2 个图表"></a>2 个图表</h3><p><img src="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/Reducing-the-Dimensionality-of-Data-with-Neural-Networks-Figure-1.png" srcset="/img/loading.gif" lazyload alt="Figure 1"></p>
-<h3 id="5-个句式"><a href="#5-个句式" class="headerlink" title="5 个句式"></a>5 个句式</h3>
+                <h1 id="Bag-of-words-model"><a href="#Bag-of-words-model" class="headerlink" title="Bag-of-words model"></a>Bag-of-words model</h1><p>假设文本或文件是一个无序的词语集合，词袋模型就像把所有的词语放入一个袋子中，这个袋子包含了关于文档的所有信息。它忽略了词语的顺序但保留了重复性。词袋模型是自然语言处理和信息检索中的基本模型。</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>以下有两个文本：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">(<span class="hljs-number">1</span>) John likes <span class="hljs-keyword">to</span> watch movies. Mary likes movies too.<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">(<span class="hljs-number">2</span>) Mary <span class="hljs-keyword">also</span> likes <span class="hljs-keyword">to</span> watch football games.<br></code></pre></td></tr></table></figure>
+
+<p>我们可以根据这两个文本构造两个列表：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-string">&quot;John&quot;</span>,<span class="hljs-string">&quot;likes&quot;</span>,<span class="hljs-string">&quot;to&quot;</span>,<span class="hljs-string">&quot;watch&quot;</span>,<span class="hljs-string">&quot;movies&quot;</span>,<span class="hljs-string">&quot;Mary&quot;</span>,<span class="hljs-string">&quot;likes&quot;</span>,<span class="hljs-string">&quot;movies&quot;</span>,<span class="hljs-string">&quot;too&quot;</span><br><br><span class="hljs-string">&quot;Mary&quot;</span>,<span class="hljs-string">&quot;also&quot;</span>,<span class="hljs-string">&quot;likes&quot;</span>,<span class="hljs-string">&quot;to&quot;</span>,<span class="hljs-string">&quot;watch&quot;</span>,<span class="hljs-string">&quot;football&quot;</span>,<span class="hljs-string">&quot;games&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>然后将列表转换为字典形式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">BoW1 = &#123;<span class="hljs-string">&quot;John&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;likes&quot;</span>:<span class="hljs-number">2</span>,<span class="hljs-string">&quot;to&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;watch&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;movies&quot;</span>:<span class="hljs-number">2</span>,<span class="hljs-string">&quot;Mary&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;too&quot;</span>:<span class="hljs-number">1</span>&#125;;<br>BoW2 = &#123;<span class="hljs-string">&quot;Mary&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;also&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;likes&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;to&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;watch&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;football&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;games&quot;</span>:<span class="hljs-number">1</span>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>字典内的顺序是任意的。如果将两个文档合并为一个文档，那么这个文档的字典将显示如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">BoW3 = &#123;<span class="hljs-string">&quot;John&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;likes&quot;</span>:<span class="hljs-number">3</span>,<span class="hljs-string">&quot;to&quot;</span>:<span class="hljs-number">2</span>,<span class="hljs-string">&quot;watch&quot;</span>:<span class="hljs-number">2</span>,<span class="hljs-string">&quot;movies&quot;</span>:<span class="hljs-number">2</span>,<span class="hljs-string">&quot;Mary&quot;</span>:<span class="hljs-number">2</span>,<span class="hljs-string">&quot;too&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;also&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;football&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;games&quot;</span>:<span class="hljs-number">1</span>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>也可以展示为如下：</p>
+<p>$$<br>BoW3 &#x3D; BoW1\uplus BoW2<br>$$</p>
+<h2 id="PyTorch-实现"><a href="#PyTorch-实现" class="headerlink" title="PyTorch 实现"></a>PyTorch 实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torchtext<br><span class="hljs-keyword">from</span> torchtext.data <span class="hljs-keyword">import</span> get_tokenizer<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">sentence_to_bow</span>(<span class="hljs-params">sentence: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">dict</span>:<br>    tokenizer = get_tokenizer(<span class="hljs-string">&quot;basic_english&quot;</span>)<br>    tokens = tokenizer(sentence)<br>    bow = &#123;&#125;<br>    <span class="hljs-keyword">for</span> token <span class="hljs-keyword">in</span> tokens:<br>        <span class="hljs-keyword">if</span> token <span class="hljs-keyword">in</span> bow:<br>            bow[token] += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:<br>            bow[token] = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> bow<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    sentence = <span class="hljs-string">&quot;John likes to watch movies. Mary likes movies too.&quot;</span><br>    <span class="hljs-built_in">print</span>(sentence_to_bow(sentence))<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -297,8 +307,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  <a href="/categories/%E7%A7%91%E7%A0%94%E7%AC%94%E8%AE%B0/" class="category-chain-item">科研笔记</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%A7%91%E7%A0%94%E7%AC%94%E8%AE%B0/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" class="category-chain-item">自然语言处理</a>
+  
+  
+
   
 
       </span>
@@ -317,8 +334,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Reducing the Dimensionality of Data with Neural Networks</div>
-      <div>http://example.com/2024/01/22/Reducing-the-Dimensionality-of-Data-with-Neural-Networks/</div>
+      <div>【自然语言处理】词袋模型</div>
+      <div>http://example.com/2023/12/20/nlp/bag-of-words-model/</div>
     </div>
     <div class="license-meta">
       
@@ -330,7 +347,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月22日</div>
+          <div>2023年12月20日</div>
         </div>
       
       
@@ -357,6 +374,23 @@
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/01/22/paper-reading/kga-a-general-machine-unlearning-framework-based-on-knowledge-gap-alignment/" title="【论文阅读】KGA: A General Machine Unlearning Framework Based on Knowledge Gap Alignment">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【论文阅读】KGA: A General Machine Unlearning Framework Based on Knowledge Gap Alignment</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
               
             </div>
 
@@ -459,7 +493,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
     </div>
   
   
