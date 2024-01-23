@@ -13,30 +13,26 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="imeursault">
+  <meta name="author" content="Meursault">
   <meta name="keywords" content="">
   
-    <meta name="description" content="KGA is a general approximate machine unlearning framework.">
+    <meta name="description" content="上溢和下溢是数值计算过程中可能会发生的问题，其都会导致灾难性的后果，需要对其进行数值稳定来确保计算不出现意外。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【论文阅读】KGA: A General Machine Unlearning Framework Based on Knowledge Gap Alignment">
-<meta property="og:url" content="http://example.com/2024/01/22/paper-reading/kga-a-general-machine-unlearning-framework-based-on-knowledge-gap-alignment/index.html">
-<meta property="og:site_name" content="iMeursault&#39;s Blog">
-<meta property="og:description" content="KGA is a general approximate machine unlearning framework.">
+<meta property="og:title" content="【机器学习】数值溢出">
+<meta property="og:url" content="https://imeursault.github.io/%E7%A7%91%E7%A0%94%E7%AC%94%E8%AE%B0/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/numeric-overflow/index.html">
+<meta property="og:site_name" content="Meursault&#39;s Blog">
+<meta property="og:description" content="上溢和下溢是数值计算过程中可能会发生的问题，其都会导致灾难性的后果，需要对其进行数值稳定来确保计算不出现意外。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Table-2.png">
-<meta property="og:image" content="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Figure-2.png">
-<meta property="og:image" content="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Figure-3.png">
-<meta property="article:published_time" content="2024-01-22T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-23T01:09:21.513Z">
-<meta property="article:author" content="imeursault">
+<meta property="article:published_time" content="2024-01-22T09:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-23T01:28:41.056Z">
+<meta property="article:author" content="Meursault">
 <meta property="article:tag" content="Machine Learning">
-<meta property="article:tag" content="Natural Language Processing">
+<meta property="article:tag" content="Math">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Table-2.png">
   
   
   
-  <title>【论文阅读】KGA: A General Machine Unlearning Framework Based on Knowledge Gap Alignment - iMeursault&#39;s Blog</title>
+  <title>【机器学习】数值溢出 - Meursault&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -74,7 +70,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/globe.svg","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"imeursault.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/globe.svg","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -202,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【论文阅读】KGA: A General Machine Unlearning Framework Based on Knowledge Gap Alignment"></span>
+            <span id="subtitle" data-typed-text="【机器学习】数值溢出"></span>
           
         </div>
 
@@ -213,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-22 09:00" pubdate>
-          2024年1月22日 上午
+        <time datetime="2024-01-22 17:00" pubdate>
+          2024年1月22日 下午
         </time>
       </span>
     
@@ -225,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          559 字
+          513 字
         
       </span>
     
@@ -273,35 +269,26 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【论文阅读】KGA: A General Machine Unlearning Framework Based on Knowledge Gap Alignment</h1>
+            <h1 id="seo-header">【机器学习】数值溢出</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="文章信息"><a href="#文章信息" class="headerlink" title="文章信息"></a>文章信息</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p><a target="_blank" rel="noopener" href="https://aclanthology.org/2023.acl-long.740.pdf">KGA: A General Machine Unlearning Framework Based on Knowledge Gap Alignment</a></p>
-<h3 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h3><p>Lingzhi Wang</p>
-<h3 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h3><p>The Chinese University of Hong Kong</p>
-<h3 id="期刊"><a href="#期刊" class="headerlink" title="期刊"></a>期刊</h3><p>Association for Computational Linguistics</p>
-<h2 id="背景、目的及结论"><a href="#背景、目的及结论" class="headerlink" title="背景、目的及结论"></a>背景、目的及结论</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Recent legislation of the “right to be forgotten” has led to the interest in machine unlearning, where the learned models are endowed with the function to forget information about specific training instances as if they have never existed in the training set. Previous work mainly focuses on computer vision scenarios and largely ignores the essentials of unlearning in NLP field, where text data contains more explicit and sensitive personal information than images.</p>
-<h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>To propose a general framework KGA for NLP field to implement Machine Unlearning. KGA maintains the distribution differences(knowledge gap), which relaxes the distribution assumption.</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>This paper proposes KGA, <strong>a general approximate machine unlearning framework</strong> and explores its application in several NLP tasks. KGA leverages the distribution differences between two sets of models to make the unlearned model perform on forgetting data like its unseen data. Experiments on three large-scale datasets and further experiments validate the effectiveness of KGA.</p>
-<h2 id="结果与讨论"><a href="#结果与讨论" class="headerlink" title="结果与讨论"></a>结果与讨论</h2><p><img src="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Table-2.png" srcset="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/globe.svg" lazyload></p>
-<p>KGA unlearning method can better maintain the performance on test set.</p>
-<h2 id="文章好在哪里"><a href="#文章好在哪里" class="headerlink" title="文章好在哪里"></a>文章好在哪里</h2><p>文章介绍了 Knowledge Gap 的概念，旨在两个<strong>结构相同</strong>的模型在<strong>不同数据集</strong>上训练出来进行预测，其<strong>预测分布之间的距离</strong>为 Knowledge Gap。将数据集划分为训练数据集 $D$，遗忘数据集 $D_f$，额外小数据集 $D_n$。通过最小化</p>
-<p>$$<br>\left|dis_{(D_n)}(A_D, A_n) - dis_{(D_f)}(A, A_f)\right|<br>$$</p>
-<p>来获得最优的遗忘后模型，$A$ 是原始模型。其中 $dis_{(D_n)}(A_D, A_n)$ 中的 $A_D$ 是在 $D$ 上训练得来的模型，$A_n$ 是在 $D_n$ 上训练得来的模型，然后将数据集 $D_n$ 输入进两个模型，两个模型的输出分布之间的距离为所求结果。优化目标是使模型把遗忘数据集视作完全未见过的数据，则需要使模型 $A_n$ 见到数据集 $D$ 与模型 $A$ 见到数据集 $D_f$ 之间的行为相似。</p>
-<p>文章使用 Jensen–Shannon Divergence (JSD) 和 Language model Probability Distance (LPD) 以及 Proportion of instances with Decreased Language model Probability (PDLP) 作为评估指标。</p>
-<p>文章实验部分将原始模型、重新训练的模型、Exact Unlearning: SISA、Approximate Unlearning: LCODEC 和 BADT 与 KGA 进行比较，发现 KGA 维持模型性能上能取得更好的效果，同时 KGA 的预测结果接近完全重新训练的模型。</p>
-<h2 id="自我想法"><a href="#自我想法" class="headerlink" title="自我想法"></a>自我想法</h2><h3 id="1-个思路"><a href="#1-个思路" class="headerlink" title="1 个思路"></a>1 个思路</h3><p>使用通用 Machine Unlearning 框架可以应用于多种不同的任务，当遗忘请求数变多，使用 KGA 框架也可以实现计算可行。</p>
-<p>关于数据集 $D$ 和数据集 $D_n$ 该如何选择与划分？如果这两个数据集规模也很大，或者模型本身架构 $A$​ 参数很多，对于计算可行性是否有影响？</p>
-<p>Exact Unlearning 和 Approximate Unlearning 显然有区别，Approximate Unlearning 虽然在计算资源上占优势，但是其缺点是无法完全忘掉需要遗忘的数据，如何权衡效果与计算效率之间的代价？</p>
-<h3 id="2-个图表"><a href="#2-个图表" class="headerlink" title="2 个图表"></a>2 个图表</h3><p><img src="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Figure-2.png" srcset="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/globe.svg" lazyload></p>
-<p><img src="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Figure-3.png" srcset="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/globe.svg" lazyload></p>
-<h3 id="5-个句式"><a href="#5-个句式" class="headerlink" title="5 个句式"></a>5 个句式</h3><p>The experimental results and further analyses from various aspects show that our KGA generally performs better than baselines in terms of performance maintenance and unlearning efficiency, while maintaining consistency across different scenarios and models.</p>
-<p>Existing research in machine unlearning mainly focuses on computer vision applications, e.g., image classification (Golatkar et al., 2020a,b; Mehta et al., 2022), and less attention has been paid to unlearning in the natural language processing (NLP) field, where text data contains more explicit and sensitive personal data (e.g., home address, phone number, social relationships, etc.) than images.</p>
-<p>KGA unlearning method is inspired by a general knowledge adaptation work (Khan and Swaroop, 2021), where weights and function-space priors are adopted to reconstruct the gradients of the model.</p>
-<p>It may be due to the fact that KGA tends to force the performance of forget data to be close to unseen data regardless of the BLEU ranges.</p>
-<p>Unlike classification tasks, where we can remove all data of one specific label to explore the effectiveness of unlearning, translation tasks and most of the generation tasks do not contain such simple labels to categorize instances exactly.</p>
+                <h2 id="上溢和下溢"><a href="#上溢和下溢" class="headerlink" title="上溢和下溢"></a>上溢和下溢</h2><p>数值溢出中上溢和下溢是数值计算过程中可能会发生的问题，上溢和下溢都会导致灾难性的后果。</p>
+<p>在机器学习或深度学习过程中，如果数字数值大到我们可以认为近似 $\infty$ 或者 $-\infty$，使用此数值进一步计算得到的结果会导致意想不到的问题。如果一个数值小到会被计算机近似为 $0$，可能会出现被零除的问题。</p>
+<p>在解决如上问题时，可以使用 $softmax$ 函数来处理。$softmax$ 函数的定义如下：</p>
+<p>$$<br>softmax(x_i)&#x3D;\frac{exp(x_i)}{\sum^n_{j &#x3D; 1}exp(x_j)}<br>$$</p>
+<p>如果不加任何操作，当存在 $x_i$ 的量级非常大时，$exp(x_i)$ 会得到一个量级特别大的结果，可能会导致上溢。因此我们需要将 $\mathbf{x}$ 中最大值 $\text{max}_{i}\ x_i$ 作为基准，将 $\mathbf{x}$ 中的每个值都减去这个最大值，此时向量中最大值变为 $0$，其余值将变为负数，这样 $exp(x_i)$就不会存在上溢的问题。</p>
+<p>如上操作可写为：$\mathbf{z} &#x3D; \mathbf{x} - \text{max}_{i}\ x_i$, $softmax(z)$，也叫做向量归一化。</p>
+<p>由于向量中最大值为 $0$，$exp(0) &#x3D; 1$，保证了 $softmax$ 函数中分母至少为 $1$，从而排除了分母下溢的可能性。</p>
+<p>同时，在计算 $\log\ softmax$ 时，也可以使用如上技巧来稳定数值，因为：</p>
+<p>$$<br>\log\ softmax(x) &#x3D; x_i - \log\left(\sum^n_{j&#x3D;1}exp(x_j)\right)<br>$$</p>
+<p>其中 $\log\left(\sum^n_{j&#x3D;1}exp(x_j)\right)$</p>
+<ol>
+<li>$exp(x_j)$ 可能存在上溢的问题</li>
+<li>如果 $\sum^n_{j&#x3D;1}exp(x_j)$ 中 $x_j$ 都趋近于 $-\infty$，会导致计算 $\log(0)$ 而导致上溢。</li>
+</ol>
+<p>而使用如上归一化向量后，$\log\left(\sum^n_{j&#x3D;1}exp(x^\prime_j)\right)$，$x^\prime_j &#x3D; x_j - x_{max}$，$x^\prime_j$ 最大值为 $0$，其余值均为负数，求和时结果至少大于 $1$，因此在进行对数运算时，不会出现数值溢出的问题。</p>
 
                 
               </div>
@@ -320,8 +307,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  <a href="/categories/%E7%A7%91%E7%A0%94%E7%AC%94%E8%AE%B0/" class="category-chain-item">科研笔记</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%A7%91%E7%A0%94%E7%AC%94%E8%AE%B0/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="category-chain-item">数值计算</a>
+  
+  
+
   
 
       </span>
@@ -337,7 +331,7 @@
       
         <a href="/tags/Machine-Learning/" class="print-no-link">#Machine Learning</a>
       
-        <a href="/tags/Natural-Language-Processing/" class="print-no-link">#Natural Language Processing</a>
+        <a href="/tags/Math/" class="print-no-link">#Math</a>
       
     </div>
   
@@ -349,14 +343,14 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【论文阅读】KGA: A General Machine Unlearning Framework Based on Knowledge Gap Alignment</div>
-      <div>http://example.com/2024/01/22/paper-reading/kga-a-general-machine-unlearning-framework-based-on-knowledge-gap-alignment/</div>
+      <div>【机器学习】数值溢出</div>
+      <div>https://imeursault.github.io/科研笔记/数值计算/numeric-overflow/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>imeursault</div>
+          <div>Meursault</div>
         </div>
       
       
@@ -394,18 +388,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/22/machine-learning/numeric-overflow/" title="【机器学习】数值溢出">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【机器学习】数值溢出</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/02/linux/dotfiles/" title="【Linux】dotfiles">
-                        <span class="hidden-mobile">【Linux】dotfiles</span>
+                      <a href="/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/kga-a-general-machine-unlearning-framework-based-on-knowledge-gap-alignment/" title="【论文笔记】KGA: A General Machine Unlearning Framework Based on Knowledge Gap Alignment">
+                        <span class="hidden-mobile">【论文笔记】KGA: A General Machine Unlearning Framework Based on Knowledge Gap Alignment</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -462,6 +450,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -655,6 +649,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
