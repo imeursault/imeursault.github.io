@@ -24,7 +24,7 @@
 <meta property="og:description" content="上溢和下溢是数值计算过程中可能会发生的问题，其都会导致灾难性的后果，需要对其进行数值稳定来确保计算不出现意外。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-22T09:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-22T15:35:03.144Z">
+<meta property="article:modified_time" content="2024-01-23T01:28:41.056Z">
 <meta property="article:author" content="imeursault">
 <meta property="article:tag" content="Machine Learning">
 <meta property="article:tag" content="Math">
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          506 字
+          513 字
         
       </span>
     
@@ -283,8 +283,12 @@
 <p>由于向量中最大值为 $0$，$exp(0) &#x3D; 1$，保证了 $softmax$ 函数中分母至少为 $1$，从而排除了分母下溢的可能性。</p>
 <p>同时，在计算 $\log\ softmax$ 时，也可以使用如上技巧来稳定数值，因为：</p>
 <p>$$<br>\log\ softmax(x) &#x3D; x_i - \log\left(\sum^n_{j&#x3D;1}exp(x_j)\right)<br>$$</p>
-<p>其中 $\log\left(\sum^n_{j&#x3D;1}exp(x_j)\right)$ 如果不使用归一化，括号中的求和可能会得到值 $0$，这会使得求 $\log(0)$ 出现问题。</p>
-<p>而使用如上归一化向量时，$\log\left(\sum^n_{j&#x3D;1}exp(x^\prime_j)\right)$，$x^\prime_j &#x3D; x_j - x_{max}$，$x^\prime_j$ 最大值为 $0$，其余值均为负数，求和时结果至少大于 $1$，因此在进行对数运算时，不会出现数值溢出的问题。</p>
+<p>其中 $\log\left(\sum^n_{j&#x3D;1}exp(x_j)\right)$</p>
+<ol>
+<li>$exp(x_j)$ 可能存在上溢的问题</li>
+<li>如果 $\sum^n_{j&#x3D;1}exp(x_j)$ 中 $x_j$ 都趋近于 $-\infty$，会导致计算 $\log(0)$ 而导致上溢。</li>
+</ol>
+<p>而使用如上归一化向量后，$\log\left(\sum^n_{j&#x3D;1}exp(x^\prime_j)\right)$，$x^\prime_j &#x3D; x_j - x_{max}$，$x^\prime_j$ 最大值为 $0$，其余值均为负数，求和时结果至少大于 $1$，因此在进行对数运算时，不会出现数值溢出的问题。</p>
 
                 
               </div>
@@ -383,12 +387,6 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
-                    
-                      <a href="/2024/01/22/macos/macos-setup-guide/" title="【macOS】环境配置指南">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【macOS】环境配置指南</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
                     
                   </article>
                   <article class="post-next col-6">
