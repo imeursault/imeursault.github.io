@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/emoji-blink-right.svg">
+  <link rel="icon" href="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/emoji-blink-right.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/globe.svg","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -285,7 +285,7 @@
 <h2 id="背景、目的及结论"><a href="#背景、目的及结论" class="headerlink" title="背景、目的及结论"></a>背景、目的及结论</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Recent legislation of the “right to be forgotten” has led to the interest in machine unlearning, where the learned models are endowed with the function to forget information about specific training instances as if they have never existed in the training set. Previous work mainly focuses on computer vision scenarios and largely ignores the essentials of unlearning in NLP field, where text data contains more explicit and sensitive personal information than images.</p>
 <h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>To propose a general framework KGA for NLP field to implement Machine Unlearning. KGA maintains the distribution differences(knowledge gap), which relaxes the distribution assumption.</p>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>This paper proposes KGA, <strong>a general approximate machine unlearning framework</strong> and explores its application in several NLP tasks. KGA leverages the distribution differences between two sets of models to make the unlearned model perform on forgetting data like its unseen data. Experiments on three large-scale datasets and further experiments validate the effectiveness of KGA.</p>
-<h2 id="结果与讨论"><a href="#结果与讨论" class="headerlink" title="结果与讨论"></a>结果与讨论</h2><p><img src="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Table-2.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="结果与讨论"><a href="#结果与讨论" class="headerlink" title="结果与讨论"></a>结果与讨论</h2><p><img src="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Table-2.png" srcset="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/globe.svg" lazyload></p>
 <p>KGA unlearning method can better maintain the performance on test set.</p>
 <h2 id="文章好在哪里"><a href="#文章好在哪里" class="headerlink" title="文章好在哪里"></a>文章好在哪里</h2><p>文章介绍了 Knowledge Gap 的概念，旨在两个<strong>结构相同</strong>的模型在<strong>不同数据集</strong>上训练出来进行预测，其<strong>预测分布之间的距离</strong>为 Knowledge Gap。将数据集划分为训练数据集 $D$，遗忘数据集 $D_f$，额外小数据集 $D_n$。通过最小化</p>
 <p>$$<br>\left|dis_{(D_n)}(A_D, A_n) - dis_{(D_f)}(A, A_f)\right|<br>$$</p>
@@ -295,8 +295,8 @@
 <h2 id="自我想法"><a href="#自我想法" class="headerlink" title="自我想法"></a>自我想法</h2><h3 id="1-个思路"><a href="#1-个思路" class="headerlink" title="1 个思路"></a>1 个思路</h3><p>使用通用 Machine Unlearning 框架可以应用于多种不同的任务，当遗忘请求数变多，使用 KGA 框架也可以实现计算可行。</p>
 <p>关于数据集 $D$ 和数据集 $D_n$ 该如何选择与划分？如果这两个数据集规模也很大，或者模型本身架构 $A$​ 参数很多，对于计算可行性是否有影响？</p>
 <p>Exact Unlearning 和 Approximate Unlearning 显然有区别，Approximate Unlearning 虽然在计算资源上占优势，但是其缺点是无法完全忘掉需要遗忘的数据，如何权衡效果与计算效率之间的代价？</p>
-<h3 id="2-个图表"><a href="#2-个图表" class="headerlink" title="2 个图表"></a>2 个图表</h3><p><img src="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Figure-2.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Figure-3.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="2-个图表"><a href="#2-个图表" class="headerlink" title="2 个图表"></a>2 个图表</h3><p><img src="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Figure-2.png" srcset="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/globe.svg" lazyload></p>
+<p><img src="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/KGA-A-General-Machine-Unlearning-Framework-Based-on-Knowledge-Gap-Alignment-Figure-3.png" srcset="https://meursault-picture.oss-cn-hangzhou.aliyuncs.com/uPic/globe.svg" lazyload></p>
 <h3 id="5-个句式"><a href="#5-个句式" class="headerlink" title="5 个句式"></a>5 个句式</h3><p>The experimental results and further analyses from various aspects show that our KGA generally performs better than baselines in terms of performance maintenance and unlearning efficiency, while maintaining consistency across different scenarios and models.</p>
 <p>Existing research in machine unlearning mainly focuses on computer vision applications, e.g., image classification (Golatkar et al., 2020a,b; Mehta et al., 2022), and less attention has been paid to unlearning in the natural language processing (NLP) field, where text data contains more explicit and sensitive personal data (e.g., home address, phone number, social relationships, etc.) than images.</p>
 <p>KGA unlearning method is inspired by a general knowledge adaptation work (Khan and Swaroop, 2021), where weights and function-space priors are adopted to reconstruct the gradients of the model.</p>
@@ -462,12 +462,6 @@
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -661,49 +655,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
