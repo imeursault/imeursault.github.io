@@ -1,5 +1,4 @@
 const primaryColorScheme = ""; // "light" | "dark"
-const followSystemTheme = true; // Set to true to always follow system theme
 
 // Check if browser supports prefers-color-scheme media query
 function supportsSystemTheme() {
@@ -26,48 +25,50 @@ function getSystemTheme() {
   }
 }
 
-// Check if we should follow system theme
-function shouldFollowSystem() {
-  if (!followSystemTheme) {
-    // If followSystemTheme is false, check if stored theme is "auto"
-    const storedTheme = localStorage.getItem("theme");
-    return storedTheme === "auto";
+// Check if user has manually overridden the theme (only in current session)
+function hasManualOverride() {
+  const stored = sessionStorage.getItem("theme-override");
+  return stored === "true";
+}
+
+// Set manual override flag (only in current session, cleared on refresh)
+function setManualOverride(override) {
+  try {
+    if (override) {
+      sessionStorage.setItem("theme-override", "true");
+      // Also store the system theme at the time of override
+      sessionStorage.setItem("system-theme-at-override", getSystemTheme());
+    } else {
+      sessionStorage.removeItem("theme-override");
+      sessionStorage.removeItem("system-theme-at-override");
+    }
+  } catch (e) {
+    console.warn("Failed to save override preference:", e);
   }
-  // If followSystemTheme is true, always follow system
-  // This means we ignore any manual theme selections in localStorage
-  return true;
 }
 
 function getPreferTheme() {
-  // If following system theme, always use system preference
-  if (shouldFollowSystem()) {
-    return getSystemTheme();
+  // If user has manually overridden in current session, use the stored theme
+  if (hasManualOverride()) {
+    const storedTheme = sessionStorage.getItem("theme");
+    if (storedTheme && (storedTheme === "light" || storedTheme === "dark")) {
+      return storedTheme;
+    }
   }
-
-  // return theme value in local storage if it is set
-  const storedTheme = localStorage.getItem("theme");
-  if (storedTheme && storedTheme !== "auto") return storedTheme;
-
-  // return primary color scheme if it is set
+  
+  // Default: follow system theme
   if (primaryColorScheme) return primaryColorScheme;
-
-  // return user device's prefer color scheme
   return getSystemTheme();
 }
 
 let themeValue = getPreferTheme();
 
 function setPreference() {
-  // If following system theme, save "auto" to localStorage
+  // Save the actual theme value to sessionStorage (cleared on refresh)
   try {
-    if (shouldFollowSystem()) {
-      localStorage.setItem("theme", "auto");
-    } else {
-      // Save the actual theme value
-      localStorage.setItem("theme", themeValue);
-    }
+    sessionStorage.setItem("theme", themeValue);
   } catch (e) {
-    // Handle localStorage errors (e.g., in private browsing mode)
+    // Handle sessionStorage errors (e.g., in private browsing mode)
     console.warn("Failed to save theme preference:", e);
   }
   reflectPreference();
@@ -96,7 +97,23 @@ function reflectPreference() {
   }
 }
 
+// Clear any old localStorage and sessionStorage theme data on page load
+// This ensures we always start fresh and follow system theme on refresh
+try {
+  localStorage.removeItem("theme");
+  localStorage.removeItem("theme-override");
+  localStorage.removeItem("system-theme-at-override");
+  // Clear sessionStorage to reset manual overrides on refresh
+  sessionStorage.removeItem("theme");
+  sessionStorage.removeItem("theme-override");
+  sessionStorage.removeItem("system-theme-at-override");
+} catch (e) {
+  // Ignore errors
+}
+
 // set early so no page flashes / CSS is made aware
+// Always start with system theme on page load (ignore any stored preferences)
+themeValue = getSystemTheme();
 reflectPreference();
 
 window.onload = () => {
@@ -112,20 +129,21 @@ window.onload = () => {
       themeBtn.parentNode?.replaceChild(newBtn, themeBtn);
       
       newBtn.addEventListener("click", () => {
-        // If currently following system, get current system theme first
-        if (shouldFollowSystem()) {
+        // Get current theme value
+        const storedTheme = sessionStorage.getItem("theme");
+        if (storedTheme && (storedTheme === "light" || storedTheme === "dark")) {
+          themeValue = storedTheme;
+        } else {
+          // If no stored theme, use current system theme
           themeValue = getSystemTheme();
         }
+        
         // Toggle theme
         themeValue = themeValue === "light" ? "dark" : "light";
-        // Save the manual choice (this will stop following system)
-        try {
-          localStorage.setItem("theme", themeValue);
-        } catch (e) {
-          // Handle localStorage errors (e.g., in private browsing mode)
-          console.warn("Failed to save theme preference:", e);
-        }
-        reflectPreference();
+        
+        // Mark as manual override and save (only in current session)
+        setManualOverride(true);
+        setPreference();
       });
     }
   }
@@ -154,9 +172,22 @@ if (supportsSystemTheme()) {
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", ({ matches: isDark }) => {
-        // Only sync if following system theme
-        if (shouldFollowSystem()) {
-          themeValue = isDark ? "dark" : "light";
+        const newSystemTheme = isDark ? "dark" : "light";
+        const currentTheme = themeValue;
+        
+        // If user has manually overridden, check if system theme changed
+        // and if it's different from current theme, switch back to system
+        if (hasManualOverride()) {
+          // If system theme changed and is different from current, switch to system
+          if (newSystemTheme !== currentTheme) {
+            themeValue = newSystemTheme;
+            // Clear manual override since we're switching back to system
+            setManualOverride(false);
+            setPreference();
+          }
+        } else {
+          // No manual override, just follow system
+          themeValue = newSystemTheme;
           setPreference();
         }
       });
